@@ -16,6 +16,7 @@ const typeDefs = gql`
     type Query{
         users:[User]
         user:User
+        verifyUser:User
     }
     type Mutation{
         register(firstName:String lastName:String email:String! password:String!):String

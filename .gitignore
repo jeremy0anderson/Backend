@@ -4,3 +4,5 @@
 */.env
 **/*/.env
 **/*/node_modules
+.idea
+Back_end.iml

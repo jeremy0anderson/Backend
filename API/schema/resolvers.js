@@ -4,7 +4,8 @@ require('dotenv').config();
 const resolvers = {
     Query:{
         async users(){return await User.find({})},
-        async user(_,args){let user = await User.findOne({_id:args._id}); if (user) return user; return null}
+        async user(_,args, context){let user = await User.findOne({_id:args._id}); if (user) return user; return null},
+        async verifyUser(_,args,context,info){return context}
     },
     Mutation:{
         async register(_,args,context,info){

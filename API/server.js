@@ -37,7 +37,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
         resave:false,
         saveUninitialized:false,
         store:new SessionStore({
-            uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/',
+            uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/test_local_db',
             collection: "sessions"
         })
     }));
