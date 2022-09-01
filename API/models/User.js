@@ -30,7 +30,6 @@ userSchema.pre('save', async function (next) {
         const saltRounds = 10;
         this.password = await bcrypt.hash(this.password, saltRounds);
     }
-
     next();
 });
 
@@ -38,6 +37,17 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.validatePassword = async function (password) {
     return bcrypt.compareSync(password, this.password);
 };
+userSchema.pre('findOneAndUpdate', async function(next){
+    let updatedPassword;
+    try {
+        if (this._update.password) {
+            this._update.password = await bcrypt.hashSync(this._update.password, 10);
+        }
+        next();
+    } catch(e){
+        return next(e);
+    }
+})
 
 const User = mongoose.model('User', userSchema);
 

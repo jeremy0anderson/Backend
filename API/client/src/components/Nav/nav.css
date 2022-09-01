@@ -1,0 +1,14 @@
+/*NORMAL LAYOUT CONDITIONAL*/
+#Sidebar-toggle{
+    display:none!important;
+}
+#Navbar-menu{
+    display:flex!important;
+}
+
+/*XS LAYOUT CONDITIONAL*/
+@media(max-width: 550px ){
+    #Navbar-menu{display:none!important;}
+    #Sidebar-toggle{display:flex!important;}
+}
+/*S LAYOUT CONDITIONAL*/

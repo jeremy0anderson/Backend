@@ -44,6 +44,18 @@ const resolvers = {
                 console.log(user);
                 return token;
             }
+        },
+        async editUser(_,args,context,info){
+            if (!context.user) throw new Error("Invalid token. Please sign in to make changes.")
+            let update = await User.findOneAndUpdate({_id:context.user._id}, {...args.update}, {
+                returnOriginal:false
+            }).catch(e=>{
+                throw new Error(e);
+            });
+            return {
+                updateConfirmed:true,
+                updatedUser: update
+            }
         }
     }
 }
