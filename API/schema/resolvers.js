@@ -7,7 +7,12 @@ const resolvers = {
         async products(){return await Product.find({})},
         async users(){return await User.find({})},
         async user(_,args, context){let user = await User.findOne({_id:args._id}); if (user) return user; return null},
-        async verifyUser(_,args,context,info){return context}
+        async verifyUser(_,args,context,info){
+            if (context.user._id){
+                return context.user;
+            }
+            else return;
+        }
     },
     Mutation:{
         async listProduct(_,args,context,info){
