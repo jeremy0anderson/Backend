@@ -12,7 +12,7 @@ module.exports = {
             token = token.split(' ')[1]
         }
         if (!token) {
-            return req;
+            return req.session;
         }
 
         try {
