@@ -33,13 +33,11 @@ const typeDefs = gql`
         email:String
     }
     type Query{
-        products:[Product]
         users:[User]
         user:User
         verifyUser:User
     }
     type Mutation{
-        listProduct(details:ProductInput):Product
         register(firstName:String lastName:String email:String! password:String!):String
         login(email:String!,password:String!):String
         editUser(update:UpdateInput):UpdatedUser

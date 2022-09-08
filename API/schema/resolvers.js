@@ -4,7 +4,6 @@ const Product = require('../models/Products');
 require('dotenv').config();
 const resolvers = {
     Query:{
-        async products(){return await Product.find({})},
         async users(){return await User.find({})},
         async user(_,args, context){let user = await User.findOne({_id:args._id}); if (user) return user; return null},
         async verifyUser(_,args,context,info){
@@ -15,10 +14,7 @@ const resolvers = {
         }
     },
     Mutation:{
-        async listProduct(_,args,context,info){
-            let product = await Product.create({...args.details});
-            return product;
-        },
+ 
         async register(_,args,context,info){
             let toCreate = {...args};
                 let user = await User.create(toCreate);
