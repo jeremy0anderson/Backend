@@ -41,7 +41,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
             collection: "sessions"
         })
     }));
-    server.applyMiddleware({app, cors: {origin: ['http://localhost:3000', 'https://studio.apollographql.com', 'https://jeremyjs-api-server-eue9a.ondigitalocean.app', 'https://jeremyjs.dev']}});
+    server.applyMiddleware({app, cors: {origin: ['*','http://localhost:3000', 'https://studio.apollographql.com', 'https://jeremyjs-api-server-eue9a.ondigitalocean.app', 'https://jeremyjs.dev']}});
 
     await new Promise(resolve => {
         httpServer.listen(PORT, resolve);
