@@ -26,7 +26,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
     app.use(cors());
     app.use(json());
     app.use(urlencoded({extended: true}));
-    app.use(static(path.resolve(__dirname, 'client', 'build')));
+    app.use(static(path.resolve(__dirname, './client', 'build')));
     app.use(session({
         secret:process.env.SESSION_SECRET,
         name: "sid",
@@ -53,7 +53,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
 app.get('*', (req, res, next) => {
     if (req.path.includes("graphql")) next();
 
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, './client', 'build', 'index.html'));
 })
 
 //connect to database and then start the apollo server
