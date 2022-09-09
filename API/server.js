@@ -46,10 +46,12 @@ const startApolloServer = async (typeDefs, resolvers) => {
     });
     await server.start();
     // Middleware
-    app.use(cors());
+    app.use(cors({
+        origin:['*']
+    }));
     app.use(json());
     app.use(urlencoded({extended: true}));
-    app.use(static(path.resolve(__dirname, './client', 'build')));
+    app.use(static(path.resolve(__dirname, './client/build')));
     app.use(sessionConfig);
     server.applyMiddleware({app, cors: {origin: ['*','http://localhost:3000', 'https://studio.apollographql.com', 'https://jeremyjs-api-server-eue9a.ondigitalocean.app', 'https://jeremyjs.dev']}});
 
@@ -69,7 +71,7 @@ io.on('connection', (socket)=>{
 app.get('*', (req, res, next) => {
     if (req.path.includes("graphql")) next();
 
-    res.sendFile(path.resolve(__dirname, './client', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, './client/build/index.html'));
 })
 
 //connect to database and then start the apollo server
