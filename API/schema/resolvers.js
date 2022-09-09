@@ -23,7 +23,10 @@ const resolvers = {
                 _id: user._id,
             }
             const token = await sign({payload}, process.env.JWT_SECRET, {expiresIn:process.env.JWT_EXP});
-            return token;
+            return {
+                _id: user._id,
+                token
+            }
         },
         async login(_,args,context,info){
             let user = await User.findOne({email: args.email});
@@ -37,8 +40,10 @@ const resolvers = {
                     }
                     return token = await sign({payload}, process.env.JWT_SECRET, {expiresIn:process.env.JWT_EXP});
                 }
-                console.log(user);
-                return token;
+                return {
+                    _id: user._id,
+                    token
+                };
             }
         },
         async editUser(_,args,context,info){

@@ -32,14 +32,18 @@ const typeDefs = gql`
         lastName:String
         email:String
     }
+    type VerifiedUser{
+        _id: ID!
+        token: String!
+    }
     type Query{
         users:[User]
         user:User
         verifyUser:User
     }
     type Mutation{
-        register(firstName:String lastName:String email:String! password:String!):String
-        login(email:String!,password:String!):String
+        register(firstName:String lastName:String email:String! password:String!):VerifiedUser
+        login(email:String!,password:String!):VerifiedUser
         editUser(update:UpdateInput):UpdatedUser
     }
 `

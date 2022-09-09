@@ -2,7 +2,8 @@ require('dotenv').config();
 const express = require('express'),
     app = express(),
     {json, urlencoded, static} = express,
-    cors = require('cors');
+    cors = require('cors'),
+   {Server} = require('socket.io');
 
 
 const PORT = process.env.PORT || 4000,
@@ -11,7 +12,29 @@ const PORT = process.env.PORT || 4000,
     path = require('path'),
     mongoose = require('mongoose'),
     session = require('express-session'),
-    SessionStore = require('connect-mongodb-session')(session);
+    SessionStore = require('connect-mongodb-session')(session),
+    io = new Server(httpServer, {
+        cors:{
+            origin: ["*"]
+        },
+        transports: ['websocket','polling']
+    });
+const sessionConfig = session({
+    secret:process.env.SESSION_SECRET,
+    name: "sid",
+    cookie:{
+        maxAge:6000*60*24,
+        secure:process.env.NODE_ENV==="production"
+    },
+    resave:false,
+    saveUninitialized:false,
+    store:new SessionStore({
+        uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/test_local_db',
+        collection: "sessions"
+    })
+});
+const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
+io.use(wrap(sessionConfig))
 const {authMiddleware} = require("./utils/auth");
 
 
@@ -27,20 +50,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
     app.use(json());
     app.use(urlencoded({extended: true}));
     app.use(static(path.resolve(__dirname, './client', 'build')));
-    app.use(session({
-        secret:process.env.SESSION_SECRET,
-        name: "sid",
-        cookie:{
-            maxAge:6000*60*24,
-            secure:process.env.NODE_ENV==="production"
-        },
-        resave:false,
-        saveUninitialized:false,
-        store:new SessionStore({
-            uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/test_local_db',
-            collection: "sessions"
-        })
-    }));
+    app.use(sessionConfig);
     server.applyMiddleware({app, cors: {origin: ['*','http://localhost:3000', 'https://studio.apollographql.com', 'https://jeremyjs-api-server-eue9a.ondigitalocean.app', 'https://jeremyjs.dev']}});
 
     await new Promise(resolve => {
@@ -48,6 +58,12 @@ const startApolloServer = async (typeDefs, resolvers) => {
         console.log("listening on " + PORT);
     })
 }
+
+io.on('connection', (socket)=>{
+    const req = socket.request;
+    console.log(req.session);
+})
+
 
 //serve index from react app on all routes
 app.get('*', (req, res, next) => {

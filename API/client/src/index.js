@@ -9,11 +9,13 @@ import theme from './theme';
 import {ApolloProvider, ApolloClient, InMemoryCache} from "@apollo/client";
 import {BrowserRouter} from 'react-router-dom';
 
+
+const token = localStorage.getItem('token');
 const client = new ApolloClient({
-   uri:'http://localhost:4000/graphql',
+   uri:'https://jeremyjs-server.herokuapp.com/graphql',
    cache: new InMemoryCache(),
    headers:{
-      authorization: `Bearer ${localStorage.getItem('token')}` || ''
+      authorization: token!==null?`Bearer ${localStorage.getItem('token')}`:''
    },
 });
 const root = ReactDOM.createRoot(document.getElementById('root'));
