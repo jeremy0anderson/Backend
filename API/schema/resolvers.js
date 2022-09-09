@@ -30,7 +30,6 @@ const resolvers = {
         },
         async login(_,args,context,info){
             let user = await User.findOne({email: args.email});
-            let token;
             if (user){
                 let valid = await user.validatePassword(args.password);
                 if (valid){
@@ -38,7 +37,7 @@ const resolvers = {
                         email: user.email,
                         _id: user._id
                     }
-                    return token = await sign({payload}, process.env.JWT_SECRET, {expiresIn:process.env.JWT_EXP});
+                 const token = await sign({payload}, process.env.JWT_SECRET, {expiresIn:process.env.JWT_EXP});
                 }
                 return {
                     _id: user._id,

@@ -2,7 +2,7 @@ import {io} from 'socket.io-client';
 import React from 'react';
 
 
-const socket = io('http://localhost:4000',{
+const socket = io('https://jeremyjs-server.herokuapp.com/',{
    transports: ['websocket', 'polliing'],
 });
 socket.on("connect", ()=>{
