@@ -10,12 +10,12 @@ import {ApolloProvider, ApolloClient, InMemoryCache} from "@apollo/client";
 import {BrowserRouter} from 'react-router-dom';
 
 
-const token = localStorage.getItem('token');
+// const token = localStorage.getItem('token');
 const client = new ApolloClient({
    uri:'https://jeremyjs-server.herokuapp.com/graphql',
    cache: new InMemoryCache(),
    headers:{
-      authorization: token!==null?`Bearer ${localStorage.getItem('token')}`:''
+      authorization: localStorage.getItem('token')!==null?`Bearer ${localStorage.getItem('token')}`:''
    },
 });
 const root = ReactDOM.createRoot(document.getElementById('root'));

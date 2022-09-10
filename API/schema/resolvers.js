@@ -32,17 +32,17 @@ const resolvers = {
             let user = await User.findOne({email: args.email});
             if (user){
                 let valid = await user.validatePassword(args.password);
-                if (valid){
+                if (valid) {
                     let payload = {
                         email: user.email,
                         _id: user._id
                     }
-                 const token = await sign({payload}, process.env.JWT_SECRET, {expiresIn:process.env.JWT_EXP});
+                    const token = await sign({payload}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXP});
+                    return {
+                        _id: user._id,
+                        token
+                    };
                 }
-                return {
-                    _id: user._id,
-                    token
-                };
             }
         },
         async editUser(_,args,context,info){
