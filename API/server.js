@@ -46,9 +46,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
     });
     await server.start();
     // Middleware
-    app.use(cors({
-        origin:['*']
-    }));
+    app.use(cors());
     app.use(json());
     app.use(urlencoded({extended: true}));
     app.use(static(path.resolve(__dirname, './client/build')));
