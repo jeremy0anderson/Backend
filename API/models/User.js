@@ -38,7 +38,7 @@ userSchema.methods.validatePassword = async function (password) {
     return bcrypt.compareSync(password, this.password);
 };
 userSchema.pre('findOneAndUpdate', async function(next){
-    let updatedPassword;
+    if (!this._update.password) return next();
     try {
         if (this._update.password) {
             this._update.password = await bcrypt.hashSync(this._update.password, 10);

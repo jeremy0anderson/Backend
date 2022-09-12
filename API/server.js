@@ -67,9 +67,10 @@ io.on('connection', (socket)=>{
 
 //serve index from react app on all routes
 app.get('*', (req, res, next) => {
-    if (req.path.includes("graphql")) next();
-
-    res.sendFile(path.resolve(__dirname, './client/build/index.html'));
+    if (req.path.includes("graphql")) return next();
+    else res.json({
+        message: `To make a request, use ${req.originalUrl}/graphql`
+    })
 })
 
 //connect to database and then start the apollo server
