@@ -1,0 +1,14 @@
+runtime: nodejs16
+handlers:
+  # Serve all static files with url ending with a file extension
+  - url: /(.*\..+)$
+    static_files: build/\1
+    upload: build/(.*\..+)$
+  # Catch all handler to index.html
+  - url: /.*
+    static_files: build/index.html
+    upload: build/index.html
+env_variables:
+  REACT_APP_TEMPLATE_ID: template_x3ts0im
+  REACT_APP_SERVICE_ID: service_m39dxxm
+  REACT_APP_PUBLIC_KEY: Mmct4HTh_4NTqM50n

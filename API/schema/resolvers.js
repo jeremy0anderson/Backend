@@ -52,8 +52,13 @@ const resolvers = {
             }).catch(e=>{
                 throw new Error(e);
             });
+            const payload = {
+                _id: update._id,
+                email: update._email
+            }
+            const token = await sign({payload}, process.env.JWT_SECRET, {expiresIn:process.env.JWT_EXP});
             return {
-                updateConfirmed:true,
+                token,
                 updatedUser: update
             }
         }

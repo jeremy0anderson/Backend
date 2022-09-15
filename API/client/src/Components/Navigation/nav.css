@@ -1,0 +1,39 @@
+#nav-horizontal-menu{
+    display:flex!important;
+    padding-inline:15px!important;
+    width: auto!important;
+}
+#nav-horizontal-menu a{
+    position:relative!important;
+    margin-inline: 10px!important;
+}
+#expand-menu{
+    display:none!important;
+}
+.brand-right{
+
+}
+#Brand{
+    display:flex!important;
+    position: absolute!important;
+    margin-inline:15px!important;
+}
+#Navbar-container{
+    backdrop-filter: blur(15px) saturate(100%) opacity(1) brightness(100%);
+    -webkit-backdrop-filter: blur(15px) saturate(100%) opacity(1) brightness(100%);
+}
+
+
+/*mobile device dependencies*/
+
+@media (max-width: 600px) {
+    #nav-horizontal-menu{
+        display:none!important;
+    }
+    #expand-menu{
+        display:flex!important;
+    }
+    .brand-right{
+        right:10px!important;
+    }
+}

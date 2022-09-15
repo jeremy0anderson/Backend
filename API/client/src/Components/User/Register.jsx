@@ -4,6 +4,8 @@ import {motion, useInView} from "framer-motion";
 import {Button, Container, Input, Spacer, Text} from "@nextui-org/react";
 import * as Io from "react-icons/io5";
 import {useNavigate} from 'react-router-dom';
+import "./user.css"
+import {Text as MText} from "../Text/Text";
 
 
 const registerMutation = gql`
@@ -30,7 +32,9 @@ function Register(){
          },
          onCompleted: ({register})=>{
             localStorage.setItem('token', register.token);
-            localStorage.setItem('userId', register._id);         },
+            localStorage.setItem('userId', register._id);
+            nav("/user/"+register._id);
+         },
          onError:(e)=>{
             console.log(e);
          }
@@ -42,7 +46,7 @@ function Register(){
       <motion.div
          transition={{duration: 0.6, type:'spring', bounce: 0.2}}
          animate={{x: 0}}
-         initial={{x:"-100%"}}
+         initial={{x:"100%"}}
          style={{padding: 25,height: "100%",position: 'absolute',width: "100%", display: 'flex', justifyContent: 'center', alignItems: "center", top: "calc(50vh - 100px)"}}>
          <Container
             style={{justifySelf: "center",alignSelf: 'center',position: 'absolute',display: 'flex', alignItems: 'center', justifyContent: 'center'}}
@@ -56,11 +60,8 @@ function Register(){
                   style={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}
                   transition={{delay: 0.2, duration: 0.5, type: "spring", bounce: 0.2}}
                   animate={{y:0}}
-                  initial={{y: "-100vw"}}>
-                  <Text h2
-                        color={"white"}>
-                     Sign Up
-                  </Text>
+                  initial={{y: 0}}>
+                  <MText text={"Sign Up"} visible={true} element={motion.h2} speed={0.06}/>
                </motion.div>
                <Spacer x={0} y={1.75}/>
                <Input

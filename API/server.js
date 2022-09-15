@@ -42,14 +42,17 @@ const startApolloServer = async (typeDefs, resolvers) => {
     const server = new ApolloServer({
         typeDefs,
         resolvers,
+        cache: "bounded",
+        csrfPrevention:true,
+        introspection:true,
         context: authMiddleware
     });
     await server.start();
     // Middleware
     app.use(cors());
-    app.use(json());
-    app.use(urlencoded({extended: true}));
-    app.use(static(path.resolve(__dirname, './client/build')));
+    app.use(express.json());
+    app.use(express.urlencoded({extended: true}));
+    app.use(express.static(path.join(__dirname, 'client','/build')));
     app.use(sessionConfig);
     server.applyMiddleware({app, cors: {origin: ['*','http://localhost:3000', 'https://studio.apollographql.com', 'https://jeremyjs-api-server-eue9a.ondigitalocean.app', 'https://portfolio.jeremyjs.dev']}});
 
@@ -66,12 +69,9 @@ io.on('connection', (socket)=>{
 
 
 //serve index from react app on all routes
-app.get('*', (req, res, next) => {
-    if (req.path.includes("graphql")) return next();
-    else res.json({
-        message: `To make a request, use ${req.originalUrl}/graphql`
-    })
-})
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, "client","build", 'index.html'))
+});
 
 //connect to database and then start the apollo server
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/test_local_db');

@@ -1,0 +1,46 @@
+.motion-text > h1 > .word-wrapper > span {
+    font-size: 80px;
+    font-weight: 800;
+    margin: 0 0 20px;
+}
+.motion-text > h2 > .word-wrapper > span {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0;
+}
+.motion-text > h3 > .word-wrapper > span {
+    font-size: 40px;
+    font-weight: 5000;
+    line-height: 1.2;
+    margin: 0;
+}
+.motion-text > h4 > .word-wrapper > span {
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.2;
+    opacity: 0.75;
+    margin: 0;
+}
+.motion-text > h5 > .word-wrapper > span {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1;
+    opacity: 0.75;
+    margin: 0;
+}
+.motion-text > h6 > .word-wrapper > span {
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1;
+    margin: 0;
+}
+.motion-text > p > .word-wrapper > span {
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 1.2;
+    margin: 0;
+}
+.word-wrapper {
+    white-space: nowrap;
+}

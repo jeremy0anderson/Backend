@@ -23,7 +23,7 @@ const typeDefs = gql`
         password:String
     }
     type UpdatedUser{
-        updateConfirmed:Boolean
+        token: String
         updatedUser:User
     }
     type User{

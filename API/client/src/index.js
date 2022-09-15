@@ -1,42 +1,62 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import './_index.css';
+import App from './_App';
 import reportWebVitals from './reportWebVitals';
-import {NextUIProvider} from "@nextui-org/react";
-import theme from './theme';
-import {ApolloProvider, ApolloClient, InMemoryCache} from "@apollo/client";
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter} from "react-router-dom";
+import {register} from './serviceWorkerRegistration';
+import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
+import {NextUIProvider, createTheme} from "@nextui-org/react";
 
-
-// const token = localStorage.getItem('token');
+const token = localStorage.getItem('token');
 const client = new ApolloClient({
    uri:'https://jeremyjs-server.herokuapp.com/graphql',
+   // uri:"https://jeremyjs.uwr.appspot.com/graphql",/**/
    cache: new InMemoryCache(),
    headers:{
-      authorization: localStorage.getItem('token')!==null?`Bearer ${localStorage.getItem('token')}`:''
+      authorization: token!==null?`Bearer ${localStorage.getItem('token')}`:''
    },
 });
+// import {ThemeProvider} from "@mui/material";
+// import theme from "./Components/theme";
+// import {NextUIProvider, createTheme} from "@nextui-org/react";
+const darkTheme = createTheme({
+    type: "dark", // it could be "light" or "dark"
+    theme: {
+        breakpoints: {
+            xs: '390px',
+            sm: '600px',
+            md: '900px',
+            lg: '1200px',
+            xl: '1920px'
+        },
+        colors: {
+            black: "#181818",
+            text: "#e3e3e3",
+            gradient: 'linear-gradient(112deg, $blue100 -25%, $red500 -10%, $purple500 80%)',
+            link: '#5E1DAD',
+
+            // you can also create your own color
+            myColor: '#ff4ecd'
+
+            // ...  more colors
+        },
+        space: {},
+        fonts: {}
+    }
+})
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-   <React.StrictMode>
-      <BrowserRouter>
-         <ApolloProvider client={client}>
-            <NextUIProvider theme={theme}>
-               <App />
-            </NextUIProvider>
-         </ApolloProvider>
-      </BrowserRouter>
-   </React.StrictMode>
+    <React.StrictMode>
+       <NextUIProvider disableBaseline={false} theme={darkTheme}>
+       <ApolloProvider client={client}>
+          <BrowserRouter>
+             <App />
+          </BrowserRouter>
+       </ApolloProvider>
+       </NextUIProvider>
+    </React.StrictMode>
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.register();
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+register();
 reportWebVitals();
