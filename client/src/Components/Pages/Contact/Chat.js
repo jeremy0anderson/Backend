@@ -12,7 +12,8 @@ import {motion} from 'framer-motion';
 
 
 // const SocketProvider = React.createContext(socket);
-const socket = io('http://localhost:8080',{
+const socket = io('https://backend-mufac3i3ra-uc.a.run.app',{
+   autoConnect:false,
    extraHeaders: {
       authorization:`Bearer ${localStorage.getItem('token')}`
    }
@@ -39,8 +40,12 @@ class Chat extends React.Component{
    
    render(){
       return(
-         <motion.div>
-            {socket.id}
+         <motion.div
+            style={{display: "absolute", width: "100vw", height: "calc(100vh - 80px)", marginTop: 80}}>
+            <motion.button
+               onClick={()=>{socket.connect()}}>
+               Connect
+            </motion.button>
          </motion.div>
       )
    }

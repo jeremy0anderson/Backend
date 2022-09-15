@@ -7,12 +7,9 @@ import {BrowserRouter} from "react-router-dom";
 import {register} from './serviceWorkerRegistration';
 import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
 import {NextUIProvider, createTheme} from "@nextui-org/react";
-
-const token = localStorage.getItem('token');
+// const token = localStorage.getItem('token');
 const client = new ApolloClient({
-   // uri:'https://jeremyjs-server.herokuapp.com/graphql',
-   // uri:'https://backend-6vyqczwooa-uc.a.run.app/graphql',
-   uri: "http://localhost:8080/graphql",
+   uri: "https://backend-mufac3i3ra-uc.a.run.app/graphql",
    cache: new InMemoryCache(),
    headers:{
       authorization: localStorage.getItem('token')!==null?`Bearer ${localStorage.getItem('token')}`:''
