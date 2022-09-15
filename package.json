@@ -1,37 +1,29 @@
 {
-  "name": "backend",
+  "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "build": "cd API/client && npm install && npm run build",
-    "start": "cd API && npm start",
-    "dev": "cd API && nodemon server.js"
+    "prestart": "cd client && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
+    "apollo-server-cloud-functions": "^3.10.2",
     "apollo-server-express": "^3.10.2",
     "bcrypt": "^5.0.1",
     "connect-mongodb-session": "^3.1.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
+    "graphql": "^16.6.0",
     "http": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.3",
     "path": "^0.12.7",
-    "apollo-server-cloud-functions": "^3.10.2",
-    "graphql": "^16.6.0",
     "socket.io": "^4.5.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jeremy0anderson/Backend.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jeremy0anderson/Backend/issues"
-  },
-  "homepage": "https://github.com/jeremy0anderson/Backend#readme"
+  }
 }

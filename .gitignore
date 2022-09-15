@@ -1,8 +1,7 @@
-*/node_modules
-*/node_modules/*
 .env
-*/.env
-**/*/.env
-**/*/node_modules
-.idea
-Back_end.iml
+node_modules
+.firebaserc
+/.firebaserc
+functions
+firebase.json
+/client/build
