@@ -89,18 +89,18 @@ class Navbar extends React.Component{
     render(){
         const navbarVariants= {
             closed:  {
-                height: 80
+                height: 65
             },
             open: {
-                height: (this.props.items.length*60) + 80,
+                height: (this.props.items.length*65) + 65,
             }
         };
         const toolbarVariants={
             closed:  {
-                height: 60
+                height: 65,
             },
             open: {
-                  height: (this.props.items.length * 60) + 60,
+                  height: (this.props.items.length * 65) + 65,
             }
         }
         
@@ -119,33 +119,37 @@ class Navbar extends React.Component{
         return(
               <MotionConfig
                  transition={{type:'spring', bounce: 0.2, duration: 0.5}}>
-                  <motion.div layout
+                  <motion.div
                         custom={this.state}
                         animate={this.state.open?"open":"closed"}
                         initial={"closed"}
                         variants={navbarVariants}
                         style={{
+                            boxShadow: '2px 2px 10px -1px rgba(20, 20, 20, 1)',
                             width: '100vw',
-                            zIndex: 1000,
+                            zIndex: 1002,
                             position: 'fixed',
                             top: 0, left: 0,
                             display: 'flex',
+                            borderBottomRightRadius: 0,
+                            borderBottomLeftRadius: 0,
                             justifyContent: 'center',
                             alignItems: 'center'}}
                         id={"Navbar-container"}>
                       <motion.div
-                            layout
                             custom={this.state}
                             animate={this.state.open?"open":"closed"}
                             initial={"closed"}
                             variants={toolbarVariants}
                             style={{
+                                top: 0,
                                 overflow: "hidden",
-                                width: "calc(100% - 20px)",
-                                borderRadius:20,
+                                width: "100%",
                                 display: 'flex',
+                                borderBottomRightRadius: 'inherit',
+                                borderBottomLeftRadius: 'inherit',
                                 alignItems: 'center',
-                                background: `linear-gradient(112deg, hsla(50, 80%, 32%, 0.3) -40%, hsla(10, 80%, 49%, 0.5) 100%)`
+                                background: `linear-gradient(112deg, hsla(50, 80%, 32%, 0.6) -40%, hsla(10, 80%, 49%, 0.6) 100%)`
                             }}
                             id={"Toolbar"}>
                           <motion.button
@@ -158,7 +162,7 @@ class Navbar extends React.Component{
                                     display: 'flex',
                                     alignItems: 'center', justifyContent: 'center',
                                     position: 'absolute',
-                                    top: 20,
+                                    top: 12.5,
                                     borderRadius:15,
                                       padding:0,
                                     width: 40, height: 40, marginInline: 10}}>
@@ -171,9 +175,9 @@ class Navbar extends React.Component{
                                            position: 'absolute',
                                            right: 20,
                                            marginInline: 10,
-                                           top:10,
+                                           top:0,
                                            padding: 0,
-                                           height: 60,
+                                           height: 65,
                                            alignItems: 'center',
                                            justifyContent: 'space-around',
                                            margin: 0,
@@ -191,7 +195,7 @@ class Navbar extends React.Component{
                                                             activeTabID: item.text.toUpperCase()
                                                          })
                                                       }}
-                                                      whileHover={{scale:1, background: 'hsla(190, 20%, 50%, 0.2)'}}
+                                                      whileHover={{scale:1}}
                                                        whileTap={{scale: 1}}
                                                        style={{
                                                           borderRadius:12,
@@ -200,7 +204,7 @@ class Navbar extends React.Component{
                                                           padding:15,
                                                           background: 'hsla(190, 20%, 50%, 0.0)',
                                                           width: "100%",
-                                                          height: "60%",
+                                                          height: "100%",
                                                           display: 'flex',
                                                           // marginInline:15,
                                                           justifyContent: 'center',
@@ -208,17 +212,22 @@ class Navbar extends React.Component{
                                                        key={item.text+index}
                                                        to={item.to}>
                                                         {item.text}
+                                                 {this.state.activeTabID === item.text.toUpperCase() && (
+                                                       <motion.div
+                                                             style={{width: "100%", background: "white", height: 2, position: 'absolute', bottom: 2}}
+                                                             layoutId={"tabs"}/>
+                                                 )}
                                                  </MLink>
                                            )
                                      })}
                               </motion.ul>
                               <motion.ul
                                  animate={{
-                                    height:this.state.open?this.props.items.length*60:0,
+                                    height:this.state.open?this.props.items.length*65:0,
                                     opacity:this.state.open?1:0
                               }}
                                  transition={{type:'spring', bounce: 0.1, duration: 0.4}}
-                                 initial={{opacity:0, top: 60, height: 0}}
+                                 initial={{opacity:0, top: 65, height: 0}}
                                  id={"nav-vertical-menu"}
                                  style={{
                                     overflow:'hidden',
@@ -243,8 +252,8 @@ class Navbar extends React.Component{
                                           whileHover={{scale:1.08}}
                                           whileTap={{scale: 0.9}}
                                           style={{
-                                             height: 60,
-                                             width: "90%",
+                                             height: 65,
+                                             width: "100%",
                                              textDecoration: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center'}}
                                           key={item.text+index}
                                           to={item.to}>

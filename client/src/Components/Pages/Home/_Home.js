@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {motion, MotionConfig} from 'framer-motion';
 import "./home.css";
-import pfp from "../../../assets/images/pfp.webp";
+import logo from "../../../assets/logo.png";
 import {default as MotionText} from "../../Motion/Text";
 import {IoLogoGithub, IoLogoLinkedin, IoMail} from "react-icons/io5";
 import {Link} from 'react-router-dom';
@@ -9,8 +9,12 @@ import * as I from "react-icons/io5";
 import {Button, Text as NText} from "@nextui-org/react";
 import Skills, {skillsArr} from "../About/Skills";
 import {Text} from "../../Text/Text";
+import pfp from '../../../assets/pfp.png';
 import styled from "styled-components";
 import Contact, {ContactPage} from "../Contact/Contact";
+import {ParticleImage} from "../../Motion/Svg";
+import {ParticleSingleImage} from "../../Motion/particle-image";
+import cert from '../../../assets/images/cert-large.webp';
 
 const LRef = React.forwardRef((props, ref)=>{
     return <Link to={props.to} ref={ref} {...props}/>
@@ -173,26 +177,34 @@ class Home extends Component {
                            className={"centered-column"}
                            id={"Home-section-1-text"}>
                             <motion.img
-                               id={'Avatar'} src={pfp} alt={"avatar"}/>
-                            <MotionText
-                               h1
-                               color={"#f1f1f1"}
-                               text={"Hi, I'm Jeremy."}
-                               element={MText}
-                               bounce={0.1}
-                               custom={0.025}
-                               duration={0.5}/>
-                           <MotionText
-                              h4
-                              color={"#f1f1f1"}
-                              text={"Full Stack Web Developer | SLC, UT"}
-                              element={MText}
-                              bounce={0.1}
-                              delay={0.5}
-                              custom={0.025}
-                              duration={0.4}/>
-                            <Socials inView={this.state.page1}/>
+                                  style={{display: 'none'}}
+                                src={cert} alt={"avatar"}/>
                         </motion.div>
+                         <motion.div className={"ParticleContainer"} style={{zIndex: 999}}>
+                               <ParticleSingleImage repulse={70} density={85} src={pfp} size={3}/>
+                         </motion.div>
+                         <motion.div style={{
+                               position: 'absolute',zIndex: 10001, top: "10%"
+                         }}>
+                               <MotionText
+                                     h1
+                                     color={"#cd00ff"}
+                                     text={"Hi, I'm Jeremy."}
+                                     element={MText}
+                                     bounce={0.1}
+                                     custom={0.025}
+                                     duration={0.5}/>
+                               <MotionText
+                                     h4
+                                     color={"#ff00b9"}
+                                     text={"Full Stack Web Developer | SLC, UT"}
+                                     element={MText}
+                                     bounce={0.1}
+                                     delay={0.5}
+                                     custom={0.025}
+                                     duration={0.4}/>
+                               <Socials inView={this.state.page1}/>
+                         </motion.div>
                       {/*<motion.div*/}
                       {/*   style={{*/}
                       {/*      position: 'relative',*/}

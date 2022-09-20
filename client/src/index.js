@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './_index.css';
-import App from './_App';
+import './index.css';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {register} from './serviceWorkerRegistration';
@@ -9,7 +9,8 @@ import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
 import {NextUIProvider, createTheme} from "@nextui-org/react";
 // const token = localStorage.getItem('token');
 const client = new ApolloClient({
-   uri: "https://backend-mufac3i3ra-uc.a.run.app/graphql",
+   //uri: "https://backend-mufac3i3ra-uc.a.run.app/graphql",
+   uri:"http://localhost:8080/graphql",
    cache: new InMemoryCache(),
    headers:{
       authorization: localStorage.getItem('token')!==null?`Bearer ${localStorage.getItem('token')}`:''
@@ -29,7 +30,7 @@ const darkTheme = createTheme({
             xl: '1920px'
         },
         colors: {
-            black: "#181818",
+            black: "#212121",
             text: "#e3e3e3",
             gradient: 'linear-gradient(112deg, $blue100 -25%, $red500 -10%, $purple500 80%)',
             link: '#5E1DAD',
@@ -46,7 +47,6 @@ const darkTheme = createTheme({
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
        <NextUIProvider disableBaseline={false} theme={darkTheme}>
        <ApolloProvider client={client}>
           <BrowserRouter>
@@ -54,7 +54,6 @@ root.render(
           </BrowserRouter>
        </ApolloProvider>
        </NextUIProvider>
-    </React.StrictMode>
 );
 register();
 reportWebVitals();

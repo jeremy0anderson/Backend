@@ -2,7 +2,10 @@ import * as React from "react";
 import {motion} from 'framer-motion';
 import {Text} from "@nextui-org/react";
 import PropTypes, {object} from 'prop-types';
-
+import {ParticleSingleImage} from "../../Motion/particle-image";
+import skills from '../../../assets/skills.png';
+import js from '../../../assets/icons/javascriptMedium.png'
+import reactIcon from '../../../assets/icons/reactMedium.png'
 
 
 
@@ -234,7 +237,7 @@ class Skills extends React.Component {
                              
                              style={{display: 'flex',justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}
                              key={skill+"-img-container"}>
-                              <Image className={"single-skill-img"} width={70} height={70} src={link} alt={skill+"-image"}/>
+                              <motion.img className={"single-skill-img"} width={70} height={70} src={link} alt={skill+"-image"}/>
                               <Text
                                  key={skill+"text"}>
                                   {skill}

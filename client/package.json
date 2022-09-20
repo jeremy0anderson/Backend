@@ -17,8 +17,10 @@
     "dotenv": "^16.0.2",
     "eslint": "^8.22.0",
     "framer-motion": "^7.3.2",
+    "ja-ui-components": "^1.0.2",
     "ja-ui-react": "^3.1.2",
     "jda-ui": "^1.2.17",
+    "motion-ui-react": "^1.0.0",
     "octokit": "^2.0.7",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -29,12 +31,11 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-spring": "^9.5.2",
+    "react-tsparticles": "^2.3.1",
     "socket.io-client": "^4.5.2",
     "styled-components": "^5.3.5",
-    "web-vitals": "^3.0.1",
-    "react-tsparticles": "^2.3.1",
-    "tsparticles":"^2.3.1",
-    "ja-ui-components": "^1.0.2"
+    "tsparticles": "^2.3.1",
+    "web-vitals": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -59,5 +60,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

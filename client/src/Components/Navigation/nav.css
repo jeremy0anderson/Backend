@@ -1,6 +1,6 @@
 #nav-horizontal-menu{
     display:flex!important;
-    padding-inline:15px!important;
+    padding-inline:5px!important;
     width: auto!important;
 }
 #nav-horizontal-menu a{
